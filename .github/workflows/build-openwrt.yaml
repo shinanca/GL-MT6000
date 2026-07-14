@@ -64,8 +64,10 @@ jobs:
         with:
           path: "builder_repo"
 
-      - name: Update and install feeds
+      - name: Add, Update and install feeds
         run: |
+          echo "src-git zapret-git https://github.com/remittor/zapret-openwrt.git;master" >> feeds.default.conf
+          echo "src-git podkop-git https://github.com/itdoginfo/podkop.git" >> feeds.default.conf
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           # run again because sometimes it misses some dependencies
@@ -114,7 +116,7 @@ jobs:
           - **Repository:** [${{ env.REMOTE_REPOSITORY }}](https://github.com/${{ env.REMOTE_REPOSITORY }})
           - **Branch:** ${{ needs.check_commits.outputs.remote_branch }}
           - **Commit:** [${{ needs.check_commits.outputs.latest_commit_sha }}](https://github.com/${{ env.REMOTE_REPOSITORY }}/tree/${{ needs.check_commits.outputs.latest_commit_sha }})
-          
+
           ### 📝 Build Information
           - **Target:** [Flint 2 (GL-MT6000)](https://openwrt.org/toh/gl.inet/gl-mt6000)
           - **Configuration:** [${{ env.CONFIG_FILE }}](${{ env.CONFIG_FILE }})
