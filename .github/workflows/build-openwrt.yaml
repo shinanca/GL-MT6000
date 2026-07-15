@@ -67,7 +67,7 @@ jobs:
 
       - name: Add, Update and install feeds
         run: |
-          echo "src-git zapret https://github.com/remittor/zapret-openwrt.git;master" >> feeds.conf.default
+          echo "src-git zapret https://github.com/shinanca/zapret-openwrt.git;master-arm64-build-fix" >> feeds.conf.default
           echo "src-git podkop https://github.com/itdoginfo/podkop.git" >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
